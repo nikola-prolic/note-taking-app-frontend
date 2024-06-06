@@ -1,4 +1,3 @@
-<!-- AddNote.vue -->
 <template>
     <div>
       <h2>Add New Note</h2>
@@ -39,14 +38,15 @@
       axios.post('http://localhost:3000/api/notes', newNote)
         .then(response => {
           console.log('New note added:', response.data);
-          // Optionally, emit an event to notify parent components of the new note
+          // Emit an event to notify parent components of the new note
+          this.$emit('note-added');
+          // Reset the form fields
+          this.title = '';
+          this.content = '';
         })
         .catch(error => {
           console.error('Error adding new note:', error);
         });
-        // Reset the form fields
-        this.title = '';
-        this.content = '';
       }
     }
   };
